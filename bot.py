@@ -1,7 +1,7 @@
 import json
 import urllib.request
 
-API_TOKEN = 'ضع_هنا_توكن_البوت_من_BotFather'
+API_TOKEN = '8220700878:AAHvS2asqgAzYsX-L2H5FHZY2rS9YmQkq3w'
 BASE_URL = f"https://api.telegram.org/bot{API_TOKEN}/"
 
 # قائمة NFT وهمية جاهزة
