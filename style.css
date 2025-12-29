@@ -1,147 +1,30 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:#f5f7fb;overflow-x:hidden;}
 
-/* Navbar (Telegram‑style) */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 12px 16px;
-  display: flex;
-  justify-content: space-between;
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
+/* Navbar */
+.navbar{
+  position:fixed;top:0;width:100%;padding:12px 16px;display:flex;justify-content:space-between;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);z-index:1000;
 }
+.navbar button,#walletBtn button{padding:8px 14px;border-radius:999px;background:#1da1f2;color:white;font-size:14px;border:none;cursor:pointer;transition:.25s;}
+.navbar button:hover,#walletBtn button:hover{background:#1493db;}
 
-.navbar button,
-#walletBtn button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 18px;
-  background: #1da1f2;
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-  transition: .2s ease;
-}
+/* Card */
+.card{margin-top:80px;background:white;padding:22px;margin:auto;max-width:420px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.1);}
+.card input,.card textarea,.card select{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:10px;font-size:15px;}
+.row{display:flex;gap:10px;margin-top:8px;}
+.mint{width:100%;margin-top:14px;padding:14px;background:linear-gradient(135deg,#1da1f2,#4facfe);border:none;border-radius:14px;color:white;font-size:16px;cursor:pointer;transition:.25s;}
+.mint:hover{transform:translateY(-2px);}
+.mint:active{transform:scale(.97);}
 
-.navbar button:hover,
-#walletBtn button:hover {
-  background: #1493db;
-}
+/* Portal */
+.portal{position:fixed;inset:0;background:rgba(245,247,251,0.95);backdrop-filter:blur(12px);display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(100%);transition:.35s ease;z-index:2000;}
+.portal.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+.portalHeader{display:flex;justify-content:space-between;padding:14px 18px;background:white;border-bottom:1px solid #eee;font-size:18px;align-items:center;}
+.portalHeader button{background:transparent;font-size:22px;color:#333;border:none;cursor:pointer;}
+.portalContent{padding:12px 16px;overflow-y:auto;flex:1;scroll-behavior:smooth;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;}
 
-/* Main Card */
-.card {
-  margin-top: 80px;
-  background: white;
-  padding: 22px;
-  margin: auto;
-  max-width: 420px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-}
-
-.card input, .card textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 15px;
-}
-
-.btnRow {
-  margin-top: 14px;
-  text-align: center;
-}
-
-.mint {
-  padding: 12px 0;
-  width: 100%;
-  background: #1da1f2;
-  border-radius: 14px;
-  color: white;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Portal (Full‑screen viewer) */
-.portal {
-  position: fixed;
-  inset: 0;
-  background: rgba(255,255,255,0);
-  backdrop-filter: blur(12px);
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(100%);
-  transition: .35s ease;
-  z-index: 2000;
-}
-
-.portal.show {
-  pointer-events: auto;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.portalHeader {
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 18px;
-  background: white;
-  border-bottom: 1px solid #eee;
-  font-size: 18px;
-  align-items: center;
-}
-
-.portalHeader button {
-  background: transparent;
-  font-size: 22px;
-  color: #333;
-  border: none;
-  cursor: pointer;
-}
-
-.portalContent {
-  padding: 12px 16px;
-  overflow-y: auto;
-  flex: 1;
-}
-
-/* NFT card */
-.nftCard {
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-  margin-bottom: 14px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: .25s ease;
-}
-
-.nftCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 22px rgba(0,0,0,0.12);
-}
-
-.nftCard img {
-  width: 100%;
-  border-radius: 10px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-}
-
-.nftCard p {
-  font-size: 15px;
-  color: #222;
-}
+/* NFT Cards */
+.nftCard{background:white;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,0.08);padding:10px;display:flex;flex-direction:column;gap:6px;transition:.3s;}
+.nftCard:hover{transform:translateY(-4px);box-shadow:0 6px 22px rgba(0,0,0,0.12);}
+.nftCard img{width:100%;border-radius:10px;aspect-ratio:1/1;object-fit:cover;}
+.nftCard p{font-size:14px;color:#222;}
