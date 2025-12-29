@@ -5,116 +5,21 @@
 
 body {
   background: #f5f7fb;
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
+  margin: 0;
 }
 
-.card {
-  background: white;
-  width: 100%;
-  max-width: 420px;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+/* Buttons */
+button {
+  transition: all 0.25s ease;
 }
 
-h1 {
-  margin-bottom: 6px;
+button:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
 }
 
-.subtitle {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-label {
-  font-size: 13px;
-  margin-top: 14px;
-  display: block;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-}
-
-textarea {
-  resize: none;
-  height: 80px;
-}
-
-.toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.switch {
-  position: relative;
-  width: 44px;
-  height: 24px;
-}
-
-.switch input {
-  display: none;
-}
-
-.slider {
-  position: absolute;
-  background: #ccc;
-  border-radius: 30px;
-  inset: 0;
-}
-
-.slider::before {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: white;
-  border-radius: 50%;
-  top: 3px;
-  left: 3px;
-  transition: 0.3s;
-}
-
-.switch input:checked + .slider {
-  background: #1da1f2;
-}
-
-.switch input:checked + .slider::before {
-  transform: translateX(20px);
-}
-
-.option {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 14px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.option.active {
-  border-color: #1da1f2;
-  background: #f0f8ff;
-}
-
-.mint {
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px;
-  background: #1da1f2;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
+button:active {
+  transform: scale(0.97);
 }
 
 /* Top bar */
@@ -127,35 +32,85 @@ textarea {
   z-index: 1000;
 }
 
-.topbar button {
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: none;
+.topbar button,
+#walletBtn button {
+  padding: 8px 16px;
+  border-radius: 999px;
   background: #1da1f2;
-  color: white;
+  color: #fff;
+  border: none;
   cursor: pointer;
 }
 
-/* NFT Panel */
-.nft-panel {
+/* Card */
+.card {
+  max-width: 420px;
+  margin: 120px auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* NFT FULL PAGE */
+.nft-page {
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 280px;
-  height: 100%;
-  background: white;
-  box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+  inset: 0;
+  background: #f5f7fb;
+  z-index: 2000;
   padding: 20px;
-  overflow-y: auto;
-  z-index: 999;
+  animation: slideUp 0.35s ease;
 }
 
 .hidden {
   display: none;
 }
 
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.nft-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nft-header button {
+  background: transparent;
+  color: #1da1f2;
+  font-size: 16px;
+}
+
+/* NFT Grid */
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.nft-item {
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
 .nft-item img {
   width: 100%;
   border-radius: 10px;
-  margin-bottom: 8px;
+}
+
+/* Mint */
+.mint {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: linear-gradient(135deg, #1da1f2, #4facfe);
+  color: white;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
 }
