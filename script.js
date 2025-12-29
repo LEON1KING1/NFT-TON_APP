@@ -1,112 +1,49 @@
-ConnectnectUIE_API_KEY"; 
+import { NFTStorage, File } from 'https://unpkg.com/nft.storage/dist/bundle.esm.min.js';
 
-// TONNFT_STORAGE_APIFTStorage, File } from 'https://unpkg.com/nft.storage/dist/bundle.esm.min.js';
+// ضع مفتاحك هنا من nft.storage
+const NFT_STORAGE_KEY = "ba8e5ed0.c5daf8b936ce49f3a0509d5138222a19";
 
-// ضع هنا مفتاحك من nft.storage
-const NFT_STORAGE_KEY =ba8e5ed0.c5daf8b936ce49f3a0509d5138222a19"; 
+const client = new NFTStorage({ token: NFT_STORAGE_KEY });
 
-// TON Connect
-const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-  manifestUrl:"https://LEON1KING1.github.io/NFT-TON_APP/tonconnect-manifest.json",
-  buttonRootId:"walletBtn"
-});
+const nftContainer = document.getElementById("nftContainer");
+const mintBtn = document.getElementById("mintBtn");
 
-let walletAddress = null;
+mintBtn.onclick = async () => {
+  const name = document.getElementById("nftName").value.trim();
+  const imageUrl = document.getElementById("nftImage").value.trim();
+  const desc = document.getElementById("nftDesc").value.trim();
 
-// متابعة حالة المحفظة
-tonConnectUI.onStatusChange(async wallet=>{
-  if(!wallet) return;
-  walletAddress = wallet.account.address;
-  document.getElementById("owner").value = walletAddress;
-  loadNFTs();
-});
-
-// فتح/إغلاق Portal
-document.getElementById("openNfts").onclick = () => document.getElementById("nftPortal").classList.add("show");
-document.getElementById("closePortal").onclick = () => document.getElementById("nftPortal").classList.remove("show");
-
-// تحميل NFTs وعرضها
-async function loadNFTs() {
-  const container = document.getElementById("nftContainer");
-  if(!walletAddress){
-    container.innerHTML = "<p style='text-align:center;padding:16px;color:#888'>Connect wallet to view NFTs</p>";
+  if(!name || !imageUrl){
+    alert("Name and Image URL required");
     return;
   }
-  container.innerHTML = "<p style='text-align:center;padding:16px;color:#888'>Loading...</p>";
 
   try{
-    const res = await fetch(`https://tonapi.io/v2/accounts/${walletAddress}/nfts`);
-    const data = await res.json();
-    container.innerHTML = "";
-
-    if(!data.nfts || data.nfts.length === 0){
-      container.innerHTML = "<p style='text-align:center;padding:16px;color:#888'>No NFTs Found</p>";
-      return;
-    }
-
-    data.nfts.forEach(nft=>{
-      const img = nft.previews?.find(p=>p.resolution==="500x500")?.url || nft.metadata?.image || "";
-      const name = nft.metadata?.name || "Unnamed NFT";
-      const desc = nft.metadata?.description || "-";
-      const type = nft.type || "-";
-      const royalty = nft.royalty || "-";
-      const owner = nft.owner || "-";
-
-      container.innerHTML += `
-        <div class="nftCard">
-          <img src="${img}">
-          <p><strong>${name}</strong></p>
-          <p>${desc}</p>
-          <p>Type: ${type}</p>
-          <p>Owner: ${owner}</p>
-          <p>Royalty: ${royalty}%</p>
-        </div>
-      `;
+    // رفع الصورة على IPFS
+    const metadata = await client.store({
+      name,
+      description: desc,
+      image: new File([await fetch(imageUrl).then(r=>r.blob())], "nft.png",{type:"image/png"})
     });
 
+    // عرض NFT في الصفحة
+    const card = document.createElement("div");
+    card.className = "nftCard";
+    card.innerHTML = `
+      <img src="${imageUrl}">
+      <p><strong>${name}</strong></p>
+      <p>${desc}</p>
+      <p>IPFS: <a href="${metadata.url}" target="_blank">View</a></p>
+    `;
+    nftContainer.prepend(card);
+
+    // مسح الحقول بعد Mint
+    document.getElementById("nftName").value = "";
+    document.getElementById("nftImage").value = "";
+    document.getElementById("nftDesc").value = "";
+
   } catch(e){
-    container.innerHTML = "<p style='text-align:center;padding:16px;color:red'>Failed to load NFTs</p>";
     console.error(e);
+    alert("Failed to store NFT on IPFS");
   }
-}
-
-// رفع Metadata على IPFS
-async function uploadMetadataToIPFS(name, description, imageUrl, royalty, type){
-  const client = new NFTStorage({ token: NFT_STORAGE_KEY });
-  const metadata = await client.store({
-    name,
-    description,
-    image: new File([await fetch(imageUrl).then(r=>r.blob())], "nft.png",{type:"image/png"}),
-    properties:{royalty,type,owner:walletAddress}
-  });
-  return metadata.url;
-}
-
-// Mint NFT فعلي
-document.getElementById("mintBtn").onclick = async () => {
-  if(!walletAddress){alert("Connect wallet first"); return;}
-  const name = document.getElementById("nftName").value.trim();
-  const image = document.getElementById("nftImage").value.trim();
-  const desc = document.getElementById("nftDesc").value.trim();
-  const royalty = document.getElementById("royalty").value.trim();
-  const type = document.getElementById("nftType").value;
-
-  if(!name || !image){alert("Name & Image required"); return;}
-
-  // رفع Metadata على IPFS
-  const metadataURL = await uploadMetadataToIPFS(name, desc, image, royalty, type);
-
-  // سك NFT على TON - ضع هنا عنوان العقد الذكي الخاص بك
-  await tonConnectUI.sendTransaction({
-    validUntil: Math.floor(Date.now()/1000)+300,
-    messages:[{
-      address: "TON_NFT_CONTRACT_ADDRESS", // ضع عنوان العقد هنا
-      amount: "10000000", // رسوم بسيطة
-      payload: JSON.stringify({name, metadata: metadataURL, royalty, type, owner: walletAddress})
-    }]
-  });
-
-  // فتح Portal تلقائي وعرض NFT الجديد
-  document.getElementById("nftPortal").classList.add("show");
-  loadNFTs();
 };
