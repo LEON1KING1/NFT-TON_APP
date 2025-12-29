@@ -7,40 +7,37 @@
 
 <link rel="stylesheet" href="style.css">
 
+<!-- TON Connect UI -->
 <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
 
 <body>
 
+<!-- Top Bar -->
 <div class="topbar">
   <button id="myNftsBtn">🖼 My NFTs</button>
-  <button id="walletBtn">🔗 Connect Wallet</button>
+  <div id="walletBtn"></div>
 </div>
 
+<!-- NFT Side Panel -->
 <div id="nftPanel" class="nft-panel hidden">
   <h3>My NFTs</h3>
   <div id="nftList">Connect wallet to load NFTs</div>
 </div>
 
+<!-- Main Card -->
 <div class="card">
   <h1>Create an NFT</h1>
-  <p class="subtitle">Create a single NFT or a collection.</p>
+  <p class="subtitle">
+    Create a single NFT or a collection with multiple options.
+  </p>
 
-  <label>Name</label>
-  <input type="text">
+  <div class="toggle">
+    <span>Onchain Metadata</span>
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
 
-  <label>Image URL</label>
-  <input type="text">
-
-  <label>Description</label>
-  <textarea></textarea>
-
-  <label>Owner</label>
-  <input id="owner" disabled>
-
-  <button class="mint">Mint NFT</button>
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+  <label
