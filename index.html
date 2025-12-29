@@ -40,4 +40,44 @@
     </label>
   </div>
 
-  <label
+  <label>Name *</label>
+  <input id="nftName" type="text" placeholder="Name">
+
+  <label>Image URL *</label>
+  <input id="nftImage" type="text" placeholder="https://example.com/nft.png">
+
+  <label>Description</label>
+  <textarea id="nftDesc" placeholder="Description"></textarea>
+
+  <label>Owner *</label>
+  <input id="owner" type="text" placeholder="Wallet address" disabled>
+
+  <label>Royalty *</label>
+  <div class="royalty">
+    <input id="royalty" type="number" value="1">
+    <span>%</span>
+  </div>
+
+  <label>Type</label>
+
+  <div class="option active"> 
+    <strong>Regular</strong>
+    <p>Ordered collection. Only owner can mint.</p>
+  </div>
+
+  <div class="option">
+    <strong>Signature Mint</strong>
+    <p>Anyone can mint with a valid signature.</p>
+  </div>
+
+  <div class="option">
+    <strong>Merkle Mint</strong>
+    <p>Mint with a Merkle proof.</p>
+  </div>
+
+  <button class="mint" id="mintBtn">Mint NFT</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
