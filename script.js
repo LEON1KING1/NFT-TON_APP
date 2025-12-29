@@ -76,8 +76,8 @@ document.getElementById("mintBtn").onclick = () => {
     return;
   }
 
-  const name = document.querySelector("input[placeholder='Name']").value;
-  const image = document.querySelector("input[placeholder='https://example.com/nft.png']").value;
+  const name = document.getElementById("nftName").value;
+  const image = document.getElementById("nftImage").value;
 
   if (!name || !image) {
     alert("Name and Image URL are required");
