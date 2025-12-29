@@ -77,16 +77,16 @@ document.getElementById("mintBtn").onclick=async()=>{
 
   const metadataURL = await uploadMetadataToIPFS(name, desc, image, royalty, type);
 
-  // Mint NFT Transaction (ضع عنوان Contract الخاص بك)
   await tonConnectUI.sendTransaction({
     validUntil: Math.floor(Date.now()/1000)+300,
     messages:[{
       address:"TON_NFT_CONTRACT_ADDRESS",
-      amount:"10000000", // رسوم سك
+      amount:"10000000",
       payload: JSON.stringify({name, metadata:metadataURL, royalty, type, owner:walletAddress})
     }]
   });
 
-  alert("NFT minted successfully!");
-  loadNFTs(); // تحديث Portal تلقائي
+  // فتح Portal تلقائي وعرض NFT الجديد
+  document.getElementById("nftPortal").classList.add("show");
+  loadNFTs();
 };
