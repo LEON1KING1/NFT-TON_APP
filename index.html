@@ -3,28 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NFT Art Generator</title>
+<title>Create NFT</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <img src="assets/logo.png" alt="NFT Logo" class="logo">
-        <h1>NFT Art Generator</h1>
-        <p>Create unique NFT-style digital art in seconds</p>
-    </header>
+<div class="card">
+  <h1>Create an NFT</h1>
+  <p class="subtitle">
+    Create a single NFT or a collection with multiple options.
+  </p>
 
-    <main>
-        <input type="text" id="prompt" placeholder="Enter your NFT prompt here">
-        <button id="generateBtn">Generate NFT</button>
+  <div class="toggle">
+    <span>Onchain Metadata</span>
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
 
-        <div id="result"></div>
-    </main>
+  <label>Name *</label>
+  <input type="text" placeholder="Name">
 
-    <footer>
-        <p>Powered by Demo Images | Made for Telegram Web App</p>
-    </footer>
+  <label>Image URL *</label>
+  <input type="text" placeholder="https://example.com/nft.png">
+
+  <label>Description</label>
+  <textarea placeholder="Description"></textarea>
+
+  <label>Owner *</label>
+  <input type="text" placeholder="Wallet address" disabled>
+
+  <label>Royalty *</label>
+  <div class="royalty">
+    <input type="number" value="1">
+    <span>%</span>
+  </div>
+
+  <label>Type</label>
+
+  <div class="option active">
+    <strong>Regular</strong>
+    <p>Ordered collection. Only owner can mint.</p>
+  </div>
+
+  <div class="option">
+    <strong>Signature Mint</strong>
+    <p>Anyone can mint with a valid signature.</p>
+  </div>
+
+  <div class="option">
+    <strong>Merkle Mint</strong>
+    <p>Mint with a Merkle proof.</p>
+  </div>
+
+  <button id="connect">Connect Wallet</button>
 </div>
 
 <script src="script.js"></script>
