@@ -1,7 +1,9 @@
-import { NFTStorage, File } from 'https://unpkg.com/nft.storage/dist/bundle.esm.min.js';
+ConnectnectUIE_API_KEY"; 
+
+// TONNFT_STORAGE_APIFTStorage, File } from 'https://unpkg.com/nft.storage/dist/bundle.esm.min.js';
 
 // ضع هنا مفتاحك من nft.storage
-const NFT_STORAGE_KEY = "YOUR_NFT_STORAGE_API_KEY"; 
+const NFT_STORAGE_KEY =ba8e5ed0.c5daf8b936ce49f3a0509d5138222a19"; 
 
 // TON Connect
 const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
