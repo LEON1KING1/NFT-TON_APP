@@ -1,27 +1,30 @@
-// ===== TON CONNECT =====
+// ================= TON CONNECT =================
 const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-  manifestUrl: "https://LEON1KING1.github.io/NFT-TON_APP/tonconnect-manifest.json"
+  manifestUrl: "https://LEON1KING1.github.io/NFT-TON_APP/tonconnect-manifest.json",
+  buttonRootId: "walletBtn"
 });
 
 let walletAddress = null;
-
-// Connect wallet
-document.getElementById("walletBtn").onclick = async () => {
-  await tonConnectUI.connectWallet();
-};
 
 // Wallet status
 tonConnectUI.onStatusChange(async wallet => {
   if (!wallet) return;
 
   walletAddress = wallet.account.address;
-  document.getElementById("walletBtn").innerText = "✅ Connected";
   document.getElementById("owner").value = walletAddress;
 
-  loadNFTs(); // auto load NFTs
+  loadNFTs();
 });
 
-// ===== LOAD REAL NFTs =====
+// ================= NFT TYPE =================
+document.querySelectorAll(".option").forEach(opt => {
+  opt.onclick = () => {
+    document.querySelectorAll(".option").forEach(o => o.classList.remove("active"));
+    opt.classList.add("active");
+  };
+});
+
+// ================= LOAD REAL NFTs =================
 async function loadNFTs() {
   if (!walletAddress) return;
 
@@ -49,7 +52,7 @@ async function loadNFTs() {
 
       nftList.innerHTML += `
         <div class="nft-item">
-          <img src="${image}" />
+          <img src="${image}">
           <p>${nft.metadata?.name || "Unnamed NFT"}</p>
         </div>
       `;
@@ -61,7 +64,30 @@ async function loadNFTs() {
   }
 }
 
-// Toggle NFT panel
+// ================= NFT PANEL =================
 document.getElementById("myNftsBtn").onclick = () => {
   document.getElementById("nftPanel").classList.toggle("hidden");
+};
+
+// ================= MINT BUTTON =================
+document.getElementById("mintBtn").onclick = () => {
+  if (!walletAddress) {
+    alert("Connect wallet first");
+    return;
+  }
+
+  const name = document.querySelector("input[placeholder='Name']").value;
+  const image = document.querySelector("input[placeholder='https://example.com/nft.png']").value;
+
+  if (!name || !image) {
+    alert("Name and Image URL are required");
+    return;
+  }
+
+  alert(
+    "Mint simulation ✅\n\n" +
+    "Name: " + name + "\n" +
+    "Image: " + image + "\n\n" +
+    "Next step: real mint transaction"
+  );
 };
