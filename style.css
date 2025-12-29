@@ -69,7 +69,7 @@ textarea {
   position: absolute;
   background: #ccc;
   border-radius: 30px;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
 }
 
 .slider::before {
@@ -92,15 +92,6 @@ textarea {
   transform: translateX(20px);
 }
 
-.royalty {
-  display: flex;
-  align-items: center;
-}
-
-.royalty span {
-  margin-left: 8px;
-}
-
 .option {
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -112,11 +103,6 @@ textarea {
 .option.active {
   border-color: #1da1f2;
   background: #f0f8ff;
-}
-
-.option p {
-  font-size: 13px;
-  color: #666;
 }
 
 .mint {
@@ -138,6 +124,7 @@ textarea {
   right: 10px;
   display: flex;
   gap: 10px;
+  z-index: 1000;
 }
 
 .topbar button {
@@ -160,17 +147,15 @@ textarea {
   box-shadow: -5px 0 20px rgba(0,0,0,0.1);
   padding: 20px;
   overflow-y: auto;
+  z-index: 999;
 }
 
 .hidden {
   display: none;
 }
 
-.nft-item {
-  margin-bottom: 15px;
-}
-
 .nft-item img {
   width: 100%;
   border-radius: 10px;
+  margin-bottom: 8px;
 }
