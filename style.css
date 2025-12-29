@@ -1,29 +1,147 @@
-*{box-sizing:border-box;font-family:Inter,sans-serif;margin:0;padding:0;}
-body{background:#f5f7fb;overflow-x:hidden;}
-button{cursor:pointer;transition:all 0.25s ease;}
-button:hover{opacity:.9;transform:translateY(-2px);}
-button:active{transform:scale(.97);}
-.topbar{position:fixed;top:10px;right:10px;display:flex;gap:10px;z-index:1000;}
-.topbar button,#walletBtn button{padding:8px 16px;border-radius:999px;background:#1da1f2;color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-.card{max-width:420px;margin:120px auto;background:#fff;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.08);}
-.toggle{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
-.switch{position:relative;width:44px;height:24px;}
-.switch input{display:none;}
-.slider{position:absolute;inset:0;background:#ccc;border-radius:30px;}
-.slider::before{content:"";position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.3s;}
-.switch input:checked+.slider{background:#1da1f2;}
-.switch input:checked+.slider::before{transform:translateX(20px);}
-.option{border:1px solid #ddd;border-radius:12px;padding:14px;margin-top:10px;cursor:pointer;transition:all .3s;}
-.option.active{border-color:#1da1f2;background:#f0f8ff;}
-.royalty{display:flex;align-items:center;margin-top:5px;}
-.royalty span{margin-left:8px;}
-.mint{width:100%;margin-top:20px;padding:14px;background:linear-gradient(135deg,#1da1f2,#4facfe);color:#fff;border-radius:14px;border:none;font-size:16px;box-shadow:0 6px 18px rgba(0,0,0,0.15);}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
 
-/* OVERLAY */
-.overlay{position:fixed;inset:0;background:rgba(245,247,251,0.95);backdrop-filter:blur(6px);z-index:2000;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .35s ease;}
-.overlay.show{opacity:1;pointer-events:auto;}
-.overlay-header{display:flex;align-items:center;gap:10px;padding:16px 20px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
-.overlay-header button{background:transparent;color:#1da1f2;font-size:16px;}
-.overlay-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;padding:16px;overflow-y:auto;flex:1;}
-.overlay-grid .nft-item{background:#fff;border-radius:14px;padding:10px;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
-.overlay-grid .nft-item img{width:100%;border-radius:10px;}
+/* Navbar (Telegram‑style) */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.navbar button,
+#walletBtn button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 18px;
+  background: #1da1f2;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.navbar button:hover,
+#walletBtn button:hover {
+  background: #1493db;
+}
+
+/* Main Card */
+.card {
+  margin-top: 80px;
+  background: white;
+  padding: 22px;
+  margin: auto;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.card input, .card textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.btnRow {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.mint {
+  padding: 12px 0;
+  width: 100%;
+  background: #1da1f2;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Portal (Full‑screen viewer) */
+.portal {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(100%);
+  transition: .35s ease;
+  z-index: 2000;
+}
+
+.portal.show {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portalHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  align-items: center;
+}
+
+.portalHeader button {
+  background: transparent;
+  font-size: 22px;
+  color: #333;
+  border: none;
+  cursor: pointer;
+}
+
+.portalContent {
+  padding: 12px 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* NFT card */
+.nftCard {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  margin-bottom: 14px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: .25s ease;
+}
+
+.nftCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.12);
+}
+
+.nftCard img {
+  width: 100%;
+  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.nftCard p {
+  font-size: 15px;
+  color: #222;
+}
