@@ -1,14 +1,9 @@
-let walletConnected = false;
-let walletAddress = "";
+// TON Connect init
+const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+  manifestUrl: "https://LEON1KING1.github.io/NFT-TON_APP/tonconnect-manifest.json"
+});
 
-// fake NFTs (placeholder)
-const myNFTs = [
-  { name: "Cyber Lion", image: "https://picsum.photos/300?random=1" },
-  { name: "Neon Skull", image: "https://picsum.photos/300?random=2" },
-  { name: "Pixel Ghost", image: "https://picsum.photos/300?random=3" }
-];
-
-// select NFT type
+// Select NFT type
 document.querySelectorAll(".option").forEach(opt => {
   opt.onclick = () => {
     document.querySelectorAll(".option").forEach(o => o.classList.remove("active"));
@@ -16,36 +11,23 @@ document.querySelectorAll(".option").forEach(opt => {
   };
 });
 
-// connect wallet
-document.getElementById("walletBtn").onclick = () => {
-  walletConnected = true;
-  walletAddress = "EQC8...DEMO";
-
-  document.getElementById("walletBtn").innerText = "✅ Connected";
-  document.getElementById("owner").value = walletAddress;
+// Connect wallet
+document.getElementById("walletBtn").onclick = async () => {
+  await tonConnectUI.connectWallet();
 };
 
-// open NFTs panel
-document.getElementById("myNftsBtn").onclick = () => {
-  if (!walletConnected) {
-    alert("Please connect wallet first");
-    return;
+// Wallet state
+tonConnectUI.onStatusChange(wallet => {
+  if (wallet) {
+    const address = wallet.account.address;
+    document.getElementById("walletBtn").innerText = "✅ Connected";
+    document.getElementById("owner").value = address;
   }
+});
 
+// Open NFTs panel (placeholder for now)
+document.getElementById("myNftsBtn").onclick = () => {
   document.getElementById("nftPanel").classList.toggle("hidden");
-  loadNFTs();
+  document.getElementById("nftList").innerHTML =
+    "<p>NFT loading will be added next step.</p>";
 };
-
-function loadNFTs() {
-  const list = document.getElementById("nftList");
-  list.innerHTML = "";
-
-  myNFTs.forEach(nft => {
-    list.innerHTML += `
-      <div class="nft-item">
-        <img src="${nft.image}">
-        <p>${nft.name}</p>
-      </div>
-    `;
-  });
-}
