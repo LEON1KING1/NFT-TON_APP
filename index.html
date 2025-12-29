@@ -2,62 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>NFT TON App</title>
+
 <link rel="stylesheet" href="style.css">
 <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
-
 <body>
 
-<div class="topbar">
-  <button id="myNftsBtn">🖼 My NFTs</button>
+<!-- Navbar -->
+<div class="navbar">
+  <button id="openNfts">🖼 My NFTs</button>
   <div id="walletBtn"></div>
 </div>
 
-<!-- FULL SCREEN OVERLAY NFT -->
-<div id="nftOverlay" class="overlay hidden">
-  <div class="overlay-header">
-    <button id="closeOverlay">← Back</button>
+<!-- Portal‑style NFT Viewer -->
+<div id="nftPortal" class="portal hidden">
+  <div class="portalHeader">
     <h2>My NFTs</h2>
+    <button id="closePortal">✕</button>
   </div>
-  <div id="nftGrid" class="overlay-grid"></div>
+  <div id="nftContainer" class="portalContent"></div>
 </div>
 
+<!-- Main Card -->
 <div class="card">
   <h1>Create NFT</h1>
 
-  <div class="toggle">
-    <span>Onchain Metadata</span>
-    <label class="switch">
-      <input type="checkbox" checked>
-      <span class="slider"></span>
-    </label>
-  </div>
-
-  <label>Name *</label>
   <input id="nftName" placeholder="NFT name">
+  <input id="nftImage" placeholder="Image URL">
+  <textarea id="nftDesc" placeholder="Description"></textarea>
 
-  <label>Image URL *</label>
-  <input id="nftImage" placeholder="https://...">
-
-  <label>Description</label>
-  <textarea id="nftDesc"></textarea>
-
-  <label>Owner *</label>
+  <label>Owner</label>
   <input id="owner" disabled>
 
-  <label>Royalty *</label>
-  <div class="royalty">
-    <input id="royalty" type="number" value="1"><span>%</span>
+  <div class="btnRow">
+    <button class="mint" id="mintBtn">Mint NFT</button>
   </div>
-
-  <label>Type</label>
-  <div class="option active">Regular</div>
-  <div class="option">Signature Mint</div>
-  <div class="option">Merkle Mint</div>
-
-  <button class="mint" id="mintBtn">Mint NFT</button>
 </div>
 
 <script src="script.js"></script>
