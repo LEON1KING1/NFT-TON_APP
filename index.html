@@ -1,51 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NFT TON App</title>
-
-<link rel="stylesheet" href="style.css">
-<script type="module" src="https://unpkg.com/nft.storage/dist/bundle.esm.min.js"></script>
-<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFT WebApp Demo</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Navbar -->
-<div class="navbar">
-  <button id="openNfts">🖼 My NFTs</button>
-  <div id="walletBtn"></div>
+<h1>My NFT WebApp Demo</h1>
+
+<div class="mint-form">
+  <input type="text" id="nftName" placeholder="NFT Name">
+  <input type="text" id="nftImage" placeholder="Image URL">
+  <input type="text" id="nftDesc" placeholder="Description">
+  <button id="mintBtn">Mint NFT</button>
 </div>
 
-<!-- NFT Portal Overlay -->
-<div id="nftPortal" class="portal hidden">
-  <div class="portalHeader">
-    <h2>My NFTs</h2>
-    <button id="closePortal">✕</button>
-  </div>
-  <div id="nftContainer" class="portalContent"></div>
-</div>
+<h2>My NFTs</h2>
+<div id="nftContainer"></div>
 
-<!-- Main Card -->
-<div class="card">
-  <h1>Create NFT</h1>
-  <input id="nftName" placeholder="NFT name">
-  <input id="nftImage" placeholder="Image URL">
-  <textarea id="nftDesc" placeholder="Description"></textarea>
-  <input id="owner" disabled placeholder="Owner">
-  
-  <div class="row">
-    <input id="royalty" type="number" placeholder="Royalty %" value="1">
-    <select id="nftType">
-      <option value="regular">Regular</option>
-      <option value="signature">Signature Mint</option>
-      <option value="merkle">Merkle Mint</option>
-    </select>
-  </div>
-
-  <button class="mint" id="mintBtn">Mint NFT</button>
-</div>
-
-<script type="module" src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
