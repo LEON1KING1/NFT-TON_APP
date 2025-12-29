@@ -1,116 +1,29 @@
-* {
-  box-sizing: border-box;
-  font-family: Inter, Arial, sans-serif;
-}
+*{box-sizing:border-box;font-family:Inter,sans-serif;margin:0;padding:0;}
+body{background:#f5f7fb;overflow-x:hidden;}
+button{cursor:pointer;transition:all 0.25s ease;}
+button:hover{opacity:.9;transform:translateY(-2px);}
+button:active{transform:scale(.97);}
+.topbar{position:fixed;top:10px;right:10px;display:flex;gap:10px;z-index:1000;}
+.topbar button,#walletBtn button{padding:8px 16px;border-radius:999px;background:#1da1f2;color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.card{max-width:420px;margin:120px auto;background:#fff;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.08);}
+.toggle{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.switch{position:relative;width:44px;height:24px;}
+.switch input{display:none;}
+.slider{position:absolute;inset:0;background:#ccc;border-radius:30px;}
+.slider::before{content:"";position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.3s;}
+.switch input:checked+.slider{background:#1da1f2;}
+.switch input:checked+.slider::before{transform:translateX(20px);}
+.option{border:1px solid #ddd;border-radius:12px;padding:14px;margin-top:10px;cursor:pointer;transition:all .3s;}
+.option.active{border-color:#1da1f2;background:#f0f8ff;}
+.royalty{display:flex;align-items:center;margin-top:5px;}
+.royalty span{margin-left:8px;}
+.mint{width:100%;margin-top:20px;padding:14px;background:linear-gradient(135deg,#1da1f2,#4facfe);color:#fff;border-radius:14px;border:none;font-size:16px;box-shadow:0 6px 18px rgba(0,0,0,0.15);}
 
-body {
-  background: #f5f7fb;
-  margin: 0;
-}
-
-/* Buttons */
-button {
-  transition: all 0.25s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  opacity: 0.95;
-}
-
-button:active {
-  transform: scale(0.97);
-}
-
-/* Top bar */
-.topbar {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  gap: 10px;
-  z-index: 1000;
-}
-
-.topbar button,
-#walletBtn button {
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: #1da1f2;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-/* Card */
-.card {
-  max-width: 420px;
-  margin: 120px auto;
-  background: #fff;
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-/* NFT FULL PAGE */
-.nft-page {
-  position: fixed;
-  inset: 0;
-  background: #f5f7fb;
-  z-index: 2000;
-  padding: 20px;
-  animation: slideUp 0.35s ease;
-}
-
-.hidden {
-  display: none;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-.nft-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nft-header button {
-  background: transparent;
-  color: #1da1f2;
-  font-size: 16px;
-}
-
-/* NFT Grid */
-.nft-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
-}
-
-.nft-item {
-  background: #fff;
-  border-radius: 14px;
-  padding: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-.nft-item img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-/* Mint */
-.mint {
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px;
-  background: linear-gradient(135deg, #1da1f2, #4facfe);
-  color: white;
-  border-radius: 14px;
-  border: none;
-  font-size: 16px;
-}
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(245,247,251,0.95);backdrop-filter:blur(6px);z-index:2000;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .35s ease;}
+.overlay.show{opacity:1;pointer-events:auto;}
+.overlay-header{display:flex;align-items:center;gap:10px;padding:16px 20px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.overlay-header button{background:transparent;color:#1da1f2;font-size:16px;}
+.overlay-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;padding:16px;overflow-y:auto;flex:1;}
+.overlay-grid .nft-item{background:#fff;border-radius:14px;padding:10px;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
+.overlay-grid .nft-item img{width:100%;border-radius:10px;}
