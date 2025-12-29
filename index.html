@@ -8,6 +8,19 @@
 </head>
 <body>
 
+<!-- Top Bar -->
+<div class="topbar">
+  <button id="myNftsBtn">🖼 My NFTs</button>
+  <button id="walletBtn">🔗 Connect Wallet</button>
+</div>
+
+<!-- NFT Side Panel -->
+<div id="nftPanel" class="nft-panel hidden">
+  <h3>My NFTs</h3>
+  <div id="nftList"></div>
+</div>
+
+<!-- Main Card -->
 <div class="card">
   <h1>Create an NFT</h1>
   <p class="subtitle">
@@ -32,7 +45,7 @@
   <textarea placeholder="Description"></textarea>
 
   <label>Owner *</label>
-  <input type="text" placeholder="Wallet address" disabled>
+  <input id="owner" type="text" placeholder="Wallet address" disabled>
 
   <label>Royalty *</label>
   <div class="royalty">
@@ -42,7 +55,7 @@
 
   <label>Type</label>
 
-  <div class="option active">
+  <div class="option active"> 
     <strong>Regular</strong>
     <p>Ordered collection. Only owner can mint.</p>
   </div>
@@ -57,7 +70,7 @@
     <p>Mint with a Merkle proof.</p>
   </div>
 
-  <button id="connect">Connect Wallet</button>
+  <button class="mint">Mint NFT</button>
 </div>
 
 <script src="script.js"></script>
