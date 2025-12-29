@@ -1,100 +1,132 @@
-/* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(120deg, #f0f0f0, #e6e6e6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  background: #f5f7fb;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 
-.container {
-    width: 90%;
-    max-width: 500px;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.logo {
-    width: 60px;
-    margin-bottom: 15px;
+.card {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 h1 {
-    color: #333;
-    margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
-p {
-    color: #666;
-    margin-bottom: 20px;
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
-input {
-    width: 80%;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
+label {
+  font-size: 13px;
+  margin-top: 14px;
+  display: block;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+.toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  background: #ccc;
+  border-radius: 30px;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+  background: #1da1f2;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.royalty {
+  display: flex;
+  align-items: center;
+}
+
+.royalty span {
+  margin-left: 8px;
+}
+
+.option {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.option.active {
+  border-color: #1da1f2;
+  background: #f0f8ff;
+}
+
+.option p {
+  font-size: 13px;
+  color: #666;
 }
 
 button {
-    padding: 12px 25px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    background-color: #6c5ce7;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background-color: #5a4bd1;
-}
-
-#result {
-    margin-top: 20px;
-}
-
-.nft-card {
-    background-color: #fafafa;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.nft-card img {
-    width: 100%;
-    border-radius: 15px;
-    margin-bottom: 10px;
-}
-
-.prompt-text {
-    font-weight: bold;
-    color: #333;
-}
-
-.error {
-    color: red;
-}
-
-.loading {
-    color: #555;
-}
-
-footer {
-    margin-top: 25px;
-    font-size: 12px;
-    color: #999;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
 }
